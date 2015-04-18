@@ -1,0 +1,122 @@
+﻿body {
+    background-color: black;
+}
+
+.geral {
+    padding: 10px;
+}
+
+.usersclicavel {
+    cursor: pointer;
+    padding: 5px;
+    border-bottom: 3px solid #D8D8D8;
+    border-right: 3px solid #D8D8D8;
+    font-size: 16pt;
+    text-align: left;
+    margin: 5px;
+}
+
+    .usersclicavel:hover {
+        background-color: #B0B0B0;
+        border-bottom: 3px solid #303030;
+        border-right: 3px solid #303030;
+    }
+
+.dbox {
+    height: 500px;
+    overflow: auto;
+}
+
+.ocultar {
+    display: none;
+}
+
+.mostrar {
+    display: block;
+}
+
+.usuario {
+    text-decoration: underline;
+    color: blue;
+    font-size: 18pt;
+    padding: 5px;
+}
+
+.user1 {
+    background-color: black;
+    color: white;
+}
+
+.user2 {
+    background-color: white;
+    color: black;
+}
+
+.user3 {
+    background-color: red;
+    color: yellow;
+}
+
+.user4 {
+    background-color: yellow;
+    color: red;
+}
+
+.user5 {
+    background-color: silver;
+    color: black;
+}
+
+.user6 {
+    background-color: black;
+    color: silver;
+}
+
+#boxchat .panel-heading, #boxusuarios .panel-heading, #icones .panel-heading {
+    cursor: move;
+}
+
+.icones {
+    float: left;
+    margin: 3px;
+    height: 60px;
+    border-right:1px solid black;
+    padding: 3px;
+}
+
+#pos{
+    margin:0 0 0 20px;
+    background-color:white;
+    color:black;
+}
+
+.dicebox input[type=button]{
+    border:1px solid black;
+    float:right;
+    width:50px;
+}
+
+.dicebox input[type=number] {
+                width: 70px;
+                float: left;
+                margin: 0 5px 0 0;
+            }
+
+            .dicebox {
+                width: 200px;
+                float: left;
+                border: 1px solid gray;
+                background-color: silver;
+                padding: 5px;
+                margin: 5px;
+            }
+
+            #dicepanel {
+                width: 670px;
+                cursor: move;
+                margin: 0 auto;
+            }
+            .spanDesc{               
+                padding:5px;
+                border:1px solid transparent;
+            }

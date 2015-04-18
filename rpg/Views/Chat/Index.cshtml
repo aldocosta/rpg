@@ -1,0 +1,153 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <script src="/signalr/hubs"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/main.css" rel="stylesheet" />
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/mainApp.js"></script>
+</head>
+<body ng-app="mainApp" ng-controller="rpgController">
+
+    <div class="geral container">
+        <div class="row">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title" style="height:20px">
+                        <label style="float:left" ng-bind="usuario"></label>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div ng-class="[classentry]">
+                        <input ng-enter="addUser()" style="float:left;width:300px;margin:0 10px 0 0;" class="form-control" type="text" id="exampleInputName2" placeholder="Login" ng-model="name">
+                        <button ng-click="addUser()" style="float:left" type="button" class="btn btn-primary">Entrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <style>
+        </style>
+        <div class="panel panel-primary" id="dicepanel">
+            <div class="panel-heading">
+                <h3 class="panel-title" style="height:20px">
+                    <label style="float:left">Dados</label>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div class="dicebox">
+                    <div style="clear:both">
+                        <input type="number" name="name" value="" class="form-control" ng-model="d6times" /><span class="spanDesc">(Qtd.)</span>
+                    </div>
+                    <div style="clear:both">
+                        <input type="number" name="name" value="" class="form-control" ng-model="incrementod6" /><span class="spanDesc">(+/-)</span>
+                        <input type="button" name="name" value="D6" class="btn btn-primary" ng-click="rund6();" ng-disabled="{{ativado}}" />
+                    </div>
+
+                </div>
+                <div class="dicebox">
+                    <div style="clear:both">
+                        <input type="number" name="name" value=" " class="form-control" ng-model="d8times" /><span class="spanDesc">(Qtd.)</span>
+                    </div>
+                    <div style="clear:both">
+                        <input type="number" name="name" value="" class="form-control" ng-model="incrementod8" /><span class="spanDesc">(+/-)</span>
+                        <input type="button" name="name" value="D8" class="btn btn-primary" ng-click="rund8();" ng-disabled="{{ativado}}" />
+                    </div>
+                </div>
+                <div class="dicebox">
+                    <div style="clear:both">
+                        <input type="number" name="name" value=" " class="form-control" ng-model="d10times" /><span class="spanDesc">(Qtd.)</span>
+                    </div>
+                    <div style="clear:both">
+                        <input type="number" name="name" value="" class="form-control" ng-model="incrementod10" /><span class="spanDesc">(+/-)</span>
+                        <input type="button" name="name" value="D10" class="btn btn-primary" ng-click="rund10();" ng-disabled="{{ativado}}" />
+                    </div>
+                </div>
+                <div class="dicebox">
+                    <div style="clear:both">
+                        <input type="number" name="name" value=" " class="form-control" ng-model="d12times" />
+                    </div>
+                    <div style="clear:both">
+                        <input type="number" name="name" value="" class="form-control" ng-model="incrementod12" /><span class="spanDesc">(+/-)</span>
+                        <input type="button" name="name" value="D12" class="btn btn-primary" ng-click="rund12();" ng-disabled="{{ativado}}" />
+                    </div>
+                </div>
+                <div class="dicebox">
+
+                    <div style="clear:both">
+                        <input type="number" name="name" value=" " class="form-control" ng-model="d20times" />
+                    </div>
+                    <div style="clear:both">
+                        <input type="number" name="name" value="" class="form-control" ng-model="incrementod20" /><span class="spanDesc">(+/-)</span>
+                        <input type="button" name="name" value="D20" class="btn btn-primary" ng-click="rund20();" ng-disabled="{{ativado}}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin:10px 0 0 0;">
+            <div class="col-md-6" id="boxusuarios">
+                <div class="panel panel-primary dbox">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Usuários</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div id="users" ng-repeat="user in users">
+                            <div class="usersclicavel"> <span ng-bind="user.name"></span></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6 " id="boxchat">
+                <div class="panel panel-primary dbox">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Chat</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div ng-class="[classentrychat]">
+                            <input ng-enter="sendMessage()" style="float:left;width:300px;margin:0 10px 0 0;" class="form-control" type="text" id="exampleInputName2" placeholder="mensagem" ng-model="message">
+                            <button ng-click="sendMessage()" style=" float:left" type="button" class="btn btn-primary">Enviar</button>
+                        </div>
+                        <div id="msg" ng-repeat="msg in messages| orderBy:'-d'" style="clear:both">
+                            <div class="usersclicavel"> </span>  <span ng-bind="msg.message"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="panel panel-primary" id="pnlIcones">
+                <div class="panel-heading" style="cursor:move">
+                    <h3 class="panel-title">Icones <span id="pos"></span></h3>
+                </div>
+                <div class="panel-body" style="overflow:auto">
+                    <div style="width:100%;height:70px">
+                        <div ng-repeat="img in images" id="icones" class="icones">
+                            <button ng-click="clone(img.id)" onclick="$(this).fadeOut();"> <span class="glyphicon glyphicon-pushpin"></span> </button>
+                            <img id="{{img.id}}" ng-src="{{img.url}}" alt="Alternate Text" />
+                        </div>
+                        <hr style="clear:both" />
+                        <div id="iconbirth">
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <img src="/content/imagens/grid-hex.gif" alt="Alternate Text" />
+</body>
+</html>
