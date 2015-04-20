@@ -73,14 +73,14 @@ mainApp.controller('rpgController', ['$scope', function ($scope) {
     }
 
     var sendmsg = function (msg) {
-        $scope.messages.push({ message: msg, d: new Date().getTime() });
-        $scope.message = '';
+        $scope.messages.push({ message: msg, d: new Date().getTime() });        
         $scope.$digest();
     }
 
     $.connection.hub.start().done(function () {
         $scope.sendMessage = function () {
             hub.server.sendMessage($scope.name + ' disse: ' + $scope.message);
+            $scope.message = '';
             $scope.$digest();
         }
 
